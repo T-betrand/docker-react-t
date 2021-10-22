@@ -5,6 +5,7 @@ WORKDIR '/app'
 COPY package.json .
 RUN npm install 
 
+# we dont really need it but its advisable
 COPY . .
 
 CMD ["npm", "run", "start"]
