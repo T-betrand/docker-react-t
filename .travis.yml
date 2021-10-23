@@ -1,0 +1,16 @@
+# anytime were are making use of docker, supper user permissons are needed
+sudo: required
+
+# making travis ci to understand that we need docker installed
+services:
+  - docker
+
+# series of steps to occur before we deploy or test the project
+before_install:
+  # forcing the docker file to use the Dockerfile.dev
+  - docker build -t tebs98/docker-react-t -f Dockerfile.dev .
+  # each time docker build is ran, the id of a container is returned
+  #the "-t tebs98/docker-react-t" is used to automate the id copying and pasting hassle
+
+script:
+  - docker run tebs98/docker-react-t npm run test -- --coverage
